@@ -28,4 +28,17 @@ router.post('/notes', (req, res) => {
     })
 })
 
+router.delete('/notes/:id', (req, res) => {
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) throw err;
+        let id = req.params.id;
+        let dataBase = JSON.parse(data);
+        const filteredDataBase = dataBase.filter(note => note.id !== id);
+        fs.writeFile('./db/db.json', JSON.stringify(filteredDataBase, null, 2), (err) =>{
+            if (err) throw err;
+            res.json(filteredDataBase);
+        })
+    })
+})
+
 module.exports = router;
