@@ -1,24 +1,21 @@
 // Step 1: Set up Dependencies
 const express = require("express");
-const fs = require('fs');
-const path = require("path");
-const uuid = require("uuid");
+
 const apiroutes = require('./routes/apiroutes')
 const htmlroutes = require('./routes/htmlroutes')
-let data;
 
 //Step 3 Set up the server.
 const app = express();
 const PORT = process.env.PORT || 3001
 
 // these are middleware data parsing methods from the client. express.json is for post requests
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/api', apiroutes)
 app.use('/', htmlroutes)
 
 //Step 4: Set up the static Middleware.
-app.use(express.static('public'))
 
 
 
