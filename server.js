@@ -9,7 +9,7 @@ const htmlroutes = require('./routes/htmlroutes');
 //Tells the app to listen for activity locally on port 3101 or through whatever port is determined by heroku.
 const PORT = process.env.PORT || 3101;
 
-//These are middleware data parsing methods from the client. express.json is for post requests
+//Specifies the root directory where static assets are served.
 app.use(express.static('public'));
 
 //Built in middleware for post/put requests for sending data in the form of an object to the serer that you are attempting to store in the req.body. 
@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 //Express.json recognizes incoming requests which are JSON objects
 app.use(express.json());
 
-//Tells the server to use the following routes with our application
+//Tells the server to use the following paths, ex. (/api), for the routes, ex. "apiroutes", with our application.
 app.use('/api', apiroutes);
 app.use('/', htmlroutes);
 
